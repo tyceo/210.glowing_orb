@@ -17,7 +17,8 @@ public class CitySpawner : MonoBehaviour
         {
             //Pick properties of the building
             GameObject buildingType = buildings[Random.Range(0, buildings.Count)];
-            Vector3 buildingScale = new Vector3(Random.Range(1, 2.5f), Random.Range(2.5f, 8), Random.Range(1, 2.5f));
+            float size = Random.Range(1, 1.25f);
+            Vector3 buildingScale = new Vector3(size, size, size);
             Color buildingColor = new Color(Random.Range(0.9f,1f), Random.Range(0.9f, 1f), Random.Range(0.9f, 1f), 1);
 
             //Get a random location, if it is not filled then try and spawn a building.
