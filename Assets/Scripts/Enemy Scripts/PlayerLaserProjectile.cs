@@ -2,37 +2,72 @@ using UnityEngine;
 
 public class PlayerLaserProjectile : MonoBehaviour
 {
-    //Delcare Variables
-    [SerializeField] private float moveSpeed;
-    public float damage;
+    [Header("Projectile Settings")]
+    [SerializeField] private float moveSpeed = 50f;
+    public float damage = 10f;
+    [SerializeField] private LayerMask ignoreLayers;
+    [SerializeField] private float lifetime = 5f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Camera playerCamera;
+    private Rigidbody rb;
+
     void Start()
     {
-        gameObject.GetComponent<Rigidbody>().excludeLayers = 6;
+        playerCamera = Camera.main;
+        rb = GetComponent<Rigidbody>();
+
+        // Initialize projectile direction
+        Vector3 launchDirection = GetCameraCenterDirection();
+        transform.forward = launchDirection;
+
+        // Set up physics
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+
+        // Destroy after lifetime expires
+        Destroy(gameObject, lifetime);
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        //Travel Forward
-        GetComponent<Rigidbody>().linearVelocity = (transform.forward * moveSpeed);
+        // Move forward using physics
+        rb.linearVelocity = transform.forward * moveSpeed;
     }
 
-    //If colliding with enemy projectile, destroy this object.
-    private void OnCollisionEnter(Collision collision)
+    private Vector3 GetCameraCenterDirection()
     {
-        if (collision.gameObject.tag == "EnemyProjectile")
+        // Create a ray from the camera through its center
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        return ray.direction;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Ignore collisions with player and other projectiles
+        if (other.CompareTag("Player") || other.CompareTag("PlayerProjectile"))
         {
-            Destroy(collision.gameObject);
-            Destroy(this.gameObject);
+            return;
         }
 
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Building")
+        // Handle enemy projectile collisions
+        if (other.CompareTag("EnemyProjectile"))
         {
-            Destroy(this.gameObject);
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+            return;
+        }
+
+        // Handle environment collisions
+        if (other.CompareTag("Ground") || other.CompareTag("Building"))
+        {
+            Destroy(gameObject);
         }
     }
 
-
+    // Optional: Draw debug line to show projectile path
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2f);
+    }
 }

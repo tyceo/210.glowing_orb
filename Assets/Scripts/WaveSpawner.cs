@@ -25,13 +25,78 @@ public class WaveSpawner : MonoBehaviour
     float ticks;
     float seconds;
 
+
+    //toms cool counting 
+    private int initialBuildingCount;
+    private int currentBuildingCount;
+    private float percentageRemaining;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Instantiate(helicopterPrefab, new Vector3(Random.Range(-60, 60), Random.Range(15, 25), Random.Range(-60, 60)), new Quaternion());
         Instantiate(turretPrefab, new Vector3(Random.Range(-80, 80), Random.Range(20, 30), Random.Range(-80, 80)), new Quaternion());
+        Invoke(nameof(InitializeBuildingCount), 0.1f);
     }
 
+    void InitializeBuildingCount()
+    {
+        // Count all initial buildings
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+        initialBuildingCount = 0;
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.name == "building1(Clone)")
+            {
+                initialBuildingCount++;
+            }
+        }
+
+        currentBuildingCount = initialBuildingCount;
+        percentageRemaining = 100f;
+        Debug.Log($"Initial buildings: {initialBuildingCount} (100%)");
+    }
+
+    void Update()
+    {
+        // Only track if we've initialized
+        if (initialBuildingCount > 0)
+        {
+            int previousCount = currentBuildingCount;
+            currentBuildingCount = CountCurrentBuildings();
+
+            // Only update percentage if count changed
+            if (currentBuildingCount != previousCount)
+            {
+                percentageRemaining = (float)currentBuildingCount / initialBuildingCount * 100f;
+                Debug.Log($"Buildings remaining: {currentBuildingCount}/{initialBuildingCount} ({percentageRemaining:F1}%)");
+            }
+        }
+    }
+
+    int CountCurrentBuildings()
+    {
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+        int count = 0;
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.name == "building1(Clone)")
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    // Public access to the current percentage
+    public float GetPercentageRemaining()
+    {
+        return percentageRemaining;
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -68,7 +133,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         //Update Ui
-        scoreUI.text = "Score: " + score;
+        scoreUI.text = "City remaining: " + percentageRemaining + "%"; //was score
         waveUI.text = "Wave: " + wave;
 
     }

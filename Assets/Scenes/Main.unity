@@ -1428,7 +1428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3226413290127938877, guid: 3351a1dee59084a4eb8dace83776f657, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -27.1
       objectReference: {fileID: 0}
     - target: {fileID: 3226413290127938877, guid: 3351a1dee59084a4eb8dace83776f657, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1924,7 +1924,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073444593}
   serializedVersion: 4
-  m_Mass: 2
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1973,12 +1973,12 @@ MonoBehaviour:
   hoverHeight: 7
   moveSpeed: 3
   health: 100
-  laserAmmoMaximum: 15
-  laserAmmoCurrent: 15
-  laserAmmoRegeneration: 800
+  laserAmmoMaximum: 1
+  laserAmmoCurrent: 1
+  laserAmmoRegeneration: 100
   beamAmmoMaximum: 100
   beamAmmoCurrent: 100
-  beamAmmoRegeneration: 250
+  beamAmmoRegeneration: 10
   rb: {fileID: 1073444598}
 --- !u!1 &1225186005
 GameObject:
