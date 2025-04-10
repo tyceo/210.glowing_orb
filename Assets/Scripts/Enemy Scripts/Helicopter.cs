@@ -35,7 +35,7 @@ public class Helicopter : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(hasBeenDestroyed == false)
+        if (hasBeenDestroyed == false)
         {
             //Movement =========================================================================
 
@@ -62,7 +62,9 @@ public class Helicopter : MonoBehaviour
                 var front = transform.position + transform.forward * 5f;
                 var proj = Instantiate(projectile, front, transform.rotation);
             }
-        } else {
+        }
+        else
+        {
             rb.useGravity = true;
         }
 
@@ -92,5 +94,12 @@ public class Helicopter : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+
+        if (collision.gameObject.tag == "Player")
+
+        {
+            health = 0;
+        }
     }
 }
+

@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -61,6 +62,8 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
+
+
         // Only track if we've initialized
         if (initialBuildingCount > 0)
         {
@@ -96,10 +99,15 @@ public class WaveSpawner : MonoBehaviour
     public float GetPercentageRemaining()
     {
         return percentageRemaining;
+
     }
+
+
     // Update is called once per frame
     void FixedUpdate()
     {
+
+
         //Count up seconds
         ticks += 1;
         if(ticks >= 50)
@@ -130,10 +138,26 @@ public class WaveSpawner : MonoBehaviour
             secondsBetweenWaves += Random.Range(5, 10);
             helicoptersToSpawn += Random.Range(0, 2);
             turretsToSpawn += Random.Range(0, 2);
+
+            //checks to see if all buildings are destroyed
+            if (percentageRemaining == 0)
+            {
+                SceneManager.LoadScene("Title");
+            }
+        }
+
+        if (percentageRemaining != 0)
+        {
+            scoreUI.text = "City remaining: " + percentageRemaining + "%"; //was score
+        }
+
+        else if (percentageRemaining == 0)
+        {
+            scoreUI.text = "Survive until the end of the wave! ";
         }
 
         //Update Ui
-        scoreUI.text = "City remaining: " + percentageRemaining + "%"; //was score
+
         waveUI.text = "Wave: " + wave;
 
     }

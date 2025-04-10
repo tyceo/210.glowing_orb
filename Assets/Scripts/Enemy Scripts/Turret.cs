@@ -108,6 +108,11 @@ public class Turret : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+
+        if (collision.gameObject.tag == "Player")
+        {
+            health = 0;
+        }
     }
 
 }

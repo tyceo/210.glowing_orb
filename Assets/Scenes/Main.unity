@@ -1103,7 +1103,7 @@ MonoBehaviour:
   timeElapsed: 0
   score: 0
   wave: 1
-  secondsBetweenWaves: 60
+  secondsBetweenWaves: 45
   helicoptersToSpawn: 1
   turretsToSpawn: 1
   helicopterPrefab: {fileID: 894015748560746766, guid: 0addfdb2731c98d42ab9e96708104a0d, type: 3}
@@ -1924,7 +1924,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073444593}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1971,7 +1971,7 @@ MonoBehaviour:
   laserProjectile: {fileID: 3394211274266308061, guid: 46cad2fab9517df47a2c6220d95ff629, type: 3}
   beamProjectile: {fileID: 8317911428802472891, guid: 616b4c646da200f43a380d41db299997, type: 3}
   hoverHeight: 7
-  moveSpeed: 3
+  moveSpeed: 10
   health: 100
   laserAmmoMaximum: 1
   laserAmmoCurrent: 1
