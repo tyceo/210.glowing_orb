@@ -1106,8 +1106,8 @@ MonoBehaviour:
   secondsBetweenWaves: 45
   helicoptersToSpawn: 1
   turretsToSpawn: 1
-  helicopterPrefab: {fileID: 894015748560746766, guid: 0addfdb2731c98d42ab9e96708104a0d, type: 3}
-  turretPrefab: {fileID: 1601580930225171373, guid: 4d599777925fe064c93fee5ae897344a, type: 3}
+  helicopterPrefab: {fileID: 4610157724665410260, guid: 4009d4aa6cae0804c9936ed2e6dbd706, type: 3}
+  turretPrefab: {fileID: 6293666898102379040, guid: 4d599777925fe064c93fee5ae897344a, type: 3}
   helicopterSpawnLocations: []
   turretSpawnLocations: []
   scoreUI: {fileID: 1049605940}
