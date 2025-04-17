@@ -31,5 +31,16 @@ public class BrokenBuildingStopColliding : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezePositionX |
                          RigidbodyConstraints.FreezePositionY |
                          RigidbodyConstraints.FreezePositionZ;
+
+    }
+    private void Update()
+    {
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Eater"))
+            {
+            Debug.Log("test");
+            }
+        }
     }
 }
