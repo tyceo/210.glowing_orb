@@ -249,3 +249,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 500
   damage: 1
+  spawnPointName: GameObject
