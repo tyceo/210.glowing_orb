@@ -2,36 +2,66 @@ using UnityEngine;
 
 public class PlayerBeamProjectile : MonoBehaviour
 {
-    //Delcare Variables
-    [SerializeField] private float moveSpeed;
-    public float damage;
+    [Header("Projectile Settings")]
+    [SerializeField] private float moveSpeed = 50f;
+    public float damage = 10f;
+    [SerializeField] private string spawnPointName = "GameObject"; // Default name for spawn point
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Transform spawnPoint;
+    private Rigidbody rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.excludeLayers = 6; // Keep your layer exclusion
+
+        // Find spawn point automatically
+        GameObject spawnObj = GameObject.Find(spawnPointName);
+        if (spawnObj != null)
+        {
+            spawnPoint = spawnObj.transform;
+        }
+        else
+        {
+            Debug.LogError($"Spawn point '{spawnPointName}' not found!");
+        }
+    }
+
     void Start()
     {
-        gameObject.GetComponent<Rigidbody>().excludeLayers = 6;
+        if (spawnPoint != null)
+        {
+            // Set initial position and rotation to match spawn point
+            transform.position = spawnPoint.position;
+            transform.rotation = spawnPoint.rotation;
+        }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        //Travel Forward
-        //transform.position += transform.forward * moveSpeed;
-        GetComponent<Rigidbody>().linearVelocity = (transform.forward * moveSpeed);
-    }
-
-    //If colliding with enemy projectile, destroy this object.
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "EnemyProjectile")
+        if (spawnPoint != null)
         {
-            Destroy(collision.gameObject);
-            Destroy(this.gameObject);
+            // Update direction continuously to follow spawn point rotation
+            transform.forward = spawnPoint.forward;
         }
 
-        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Building")
+        // Move forward using physics
+        rb.linearVelocity = transform.forward * moveSpeed;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // If colliding with enemy projectile, destroy both
+        if (collision.gameObject.CompareTag("EnemyProjectile"))
         {
-            Destroy(this.gameObject);
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+
+        // Destroy when hitting environment
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Building"))
+        {
+            Destroy(gameObject);
         }
     }
 }
