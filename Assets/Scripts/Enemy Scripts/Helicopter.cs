@@ -41,7 +41,7 @@ public class Helicopter : MonoBehaviour
 
             //Get the position where it should go to.
             Vector3 oldPosition = transform.position;
-            transform.RotateAround(target.transform.position, Vector3.up, rotateSpeed);
+            transform.RotateAround(target.transform.position,Vector3.up, rotateSpeed);
             Vector3 newPosition = transform.position;
             transform.position = oldPosition;
 

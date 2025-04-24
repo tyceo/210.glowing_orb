@@ -52,9 +52,9 @@ MonoBehaviour:
   projectile: {fileID: 5135680089232516268, guid: 146bdb2540c853e4a9036e6eeafe812f, type: 3}
   rotateSpeed: 5
   shootSpeed: 75
-  moveSpeed: 20
-  hoverHeight: 20
-  hoverDistance: 20
+  moveSpeed: 30
+  hoverHeight: 5
+  hoverDistance: 35
   rb: {fileID: 7996856562007828633}
   hasBeenDestroyed: 0
 --- !u!54 &7996856562007828633

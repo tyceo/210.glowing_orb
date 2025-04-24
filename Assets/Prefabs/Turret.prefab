@@ -99,7 +99,7 @@ MonoBehaviour:
   target: {fileID: 0}
   projectile: {fileID: 8317911428802472891, guid: 61447b84e8346be4b9ad586f77d5b6e7, type: 3}
   shootSpeed: 100
-  moveSpeed: 5
+  moveSpeed: 10
   hoverHeight: 10
   hoverDistance: 20
   rb: {fileID: 3013702259306381972}

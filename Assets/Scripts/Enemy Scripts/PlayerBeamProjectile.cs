@@ -5,6 +5,7 @@ public class PlayerBeamProjectile : MonoBehaviour
     //Delcare Variables
     [SerializeField] private float moveSpeed;
     public float damage;
+    [SerializeField] private float timer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,4 +35,17 @@ public class PlayerBeamProjectile : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+
+        if (timer > 6)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
+
+
+    
