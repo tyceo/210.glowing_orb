@@ -9,7 +9,6 @@ public class BuildingSpawner : MonoBehaviour
     public int maxAttemptsPerObject = 30;
     public Vector3 spawnRotation = new Vector3(-90f, 0f, 0f); // Added rotation parameter
 
-
     void Start()
     {
         List<Vector3> validPositions = GenerateValidPositions();
@@ -62,15 +61,7 @@ public class BuildingSpawner : MonoBehaviour
         {
             // Create rotation quaternion from Euler angles (-90, 0, 0)
             Quaternion rotation = Quaternion.Euler(spawnRotation);
-
-            // Instantiate the object
-            GameObject spawnedObject = Instantiate(objectPrefab, pos, rotation);
-
-            // Generate random scale between 100 and 300
-            float randomScale = Random.Range(100f, 250f);
-
-            // Apply the random scale
-            spawnedObject.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+            Instantiate(objectPrefab, pos, rotation);
         }
     }
 }

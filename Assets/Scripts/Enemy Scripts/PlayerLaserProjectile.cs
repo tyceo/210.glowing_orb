@@ -7,34 +7,18 @@ public class PlayerLaserProjectile : MonoBehaviour
     public float damage = 10f;
     [SerializeField] private LayerMask ignoreLayers;
     [SerializeField] private float lifetime = 5f;
-    [SerializeField] private string spawnPointName = "GameObject"; // Name of your spawn point GameObject
 
-    private Transform spawnPoint;
+    private Camera playerCamera;
     private Rigidbody rb;
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-
-        // Automatically find the spawn point by name
-        if (GameObject.Find(spawnPointName) != null)
-        {
-            spawnPoint = GameObject.Find(spawnPointName).transform;
-        }
-        else
-        {
-            Debug.LogError($"Spawn Point named '{spawnPointName}' not found in scene!");
-        }
-    }
 
     void Start()
     {
-        if (spawnPoint != null)
-        {
-            // Set position and rotation to match spawn point
-            transform.position = spawnPoint.position;
-            transform.rotation = spawnPoint.rotation;
-        }
+        playerCamera = Camera.main;
+        rb = GetComponent<Rigidbody>();
+
+        // Initialize projectile direction
+        Vector3 launchDirection = GetCameraCenterDirection();
+        transform.forward = launchDirection;
 
         // Set up physics
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
@@ -46,14 +30,15 @@ public class PlayerLaserProjectile : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (spawnPoint != null)
-        {
-            // Update direction continuously in case player rotates
-            transform.forward = spawnPoint.forward;
-        }
-
         // Move forward using physics
         rb.linearVelocity = transform.forward * moveSpeed;
+    }
+
+    private Vector3 GetCameraCenterDirection()
+    {
+        // Create a ray from the camera through its center
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        return ray.direction;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -79,6 +64,7 @@ public class PlayerLaserProjectile : MonoBehaviour
         }
     }
 
+    // Optional: Draw debug line to show projectile path
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

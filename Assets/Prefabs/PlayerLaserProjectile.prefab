@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4281884798659098793}
   - component: {fileID: 6305550752963462817}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 1842132013046716656}
   - component: {fileID: -371348041254127517}
   - component: {fileID: 1847052872474432346}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PlayerLaserProjectile
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
@@ -201,10 +201,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 40
   damage: 2
-  ignoreLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  lifetime: 5
 --- !u!54 &-371348041254127517
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -142,7 +142,7 @@ public class WaveSpawner : MonoBehaviour
             //checks to see if all buildings are destroyed
             if (percentageRemaining == 0)
             {
-                SceneManager.LoadScene("Win");
+                SceneManager.LoadScene("Title");
             }
         }
 
