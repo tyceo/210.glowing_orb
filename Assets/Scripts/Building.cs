@@ -23,7 +23,7 @@ public class Building : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         //If this object collide with a player, building or projectile, enable this objects physics.
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Building")
+        if (col.gameObject.tag == "Player" )
         {
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
 
@@ -32,6 +32,17 @@ public class Building : MonoBehaviour
 
             GetComponent<Rigidbody>().AddExplosionForce(5, globalPositionOfContact, 1);
         }
+        
+        if (col.gameObject.tag == "Building")
+        {
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
+            //Add addiotnal force
+            Vector3 globalPositionOfContact = col.contacts[0].point;
+
+            GetComponent<Rigidbody>().AddExplosionForce(5, globalPositionOfContact, 1);
+        }
+        
     }
 
     //&& col.gameObject.GetComponent<Rigidbody>().isKinematic == true

@@ -84,8 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6948b4e8398f648805ecad71f88561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replacementPrefab: {fileID: 8401951590579726331, guid: 641ca9fe54447d4499c7b384f6efeff0, type: 3}
+  replacementPrefab: {fileID: 3808504641727429818, guid: 4f09d047bd47a9944aaa64235fe7879a, type: 3}
   positionOffset: {x: 48, y: 0, z: 1.5}
+  sizeReductionFactor: 100
 --- !u!65 &1474355711057287918
 BoxCollider:
   m_ObjectHideFlags: 0

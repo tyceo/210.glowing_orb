@@ -9,6 +9,9 @@ TagManager:
   - EnemyProjectile
   - PlayerProjectile
   - Enemy
+  - Eater
+  - Broken
+  - Broken1
   layers:
   - Default
   - TransparentFX
