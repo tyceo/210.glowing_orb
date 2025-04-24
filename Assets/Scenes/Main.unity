@@ -455,7 +455,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &75229055
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6806,6 +6806,7 @@ GameObject:
   - component: {fileID: 1073444598}
   - component: {fileID: 1073444599}
   - component: {fileID: 1073444600}
+  - component: {fileID: 1073444601}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6829,7 +6830,6 @@ Transform:
   - {fileID: 963194228}
   - {fileID: 1567781598}
   - {fileID: 1577676551}
-  - {fileID: 1452036952}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1073444595
@@ -6967,8 +6967,9 @@ MonoBehaviour:
   laserAmmoCurrent: 1
   laserAmmoRegeneration: 100
   beamAmmoMaximum: 100
-  beamAmmoCurrent: 100
+  beamAmmoCurrent: 0
   beamAmmoRegeneration: 10
+  beamCooldownTime: 1
   rb: {fileID: 1073444598}
 --- !u!114 &1073444600
 MonoBehaviour:
@@ -6986,6 +6987,27 @@ MonoBehaviour:
   invertYAxis: 0
   minVerticalAngle: -90
   maxVerticalAngle: 90
+--- !u!135 &1073444601
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073444593}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1193180089
 GameObject:
   m_ObjectHideFlags: 0
@@ -7104,6 +7126,7 @@ GameObject:
   - component: {fileID: 1452036955}
   - component: {fileID: 1452036954}
   - component: {fileID: 1452036953}
+  - component: {fileID: 1452036957}
   m_Layer: 0
   m_Name: eater
   m_TagString: Eater
@@ -7120,11 +7143,11 @@ Transform:
   m_GameObject: {fileID: 1452036951}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.401, y: 2.401, z: 2.401}
+  m_LocalPosition: {x: 0, y: 7, z: 0}
+  m_LocalScale: {x: 24.01, y: 24.01, z: 24.01}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1073444594}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1452036953
 SphereCollider:
@@ -7200,6 +7223,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452036951}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1452036957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452036951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c1c4be100dcd854ca7ad58358ace5e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attractionForce: 10
+  attractionRadius: 14.88
+  maxAttractionDistance: 0.1
+  showGizmo: 1
+  gizmoColor: {r: 0, g: 1, b: 1, a: 1}
+  targetObject: {fileID: 1073444594}
 --- !u!1 &1457331680
 GameObject:
   m_ObjectHideFlags: 0
@@ -8357,6 +8398,7 @@ SceneRoots:
   - {fileID: 369174180}
   - {fileID: 420369346}
   - {fileID: 2089001591}
+  - {fileID: 1452036952}
   - {fileID: 1073444594}
   - {fileID: 472432821}
   - {fileID: 447642987}

@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
     private float beamAmmoRecharge = 0;
     private float timeSinceBeam = 0;
 
+    [Header("Beam Cooldown")]
+    [SerializeField] private float beamCooldownTime = 1.0f; // Time between shots
+    private float lastBeamTime = -10f; // Initialize to allow immediate first shot
+    private bool canShootBeam = true;
+
+
     //Self References
     [SerializeField] private Rigidbody rb;
 
@@ -62,6 +68,19 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Broken1"))
+        {
+            
+            Destroy(other.gameObject);
+            beamAmmoCurrent += 1;
+        }
+    }
+
+
+    
+
     //Normal update for standard button presses/input.
     void Update()
     {
@@ -70,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
         //FIRING =======================================================================================================
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-
+        /*
         if (Input.GetMouseButtonDown(0))
         {
             //If player has ammo
@@ -90,6 +109,7 @@ public class PlayerController : MonoBehaviour
                 laserAmmoCurrent -= 1;
             }
         }
+        */
 
         if (Input.GetMouseButton(1))
         {
@@ -98,13 +118,14 @@ public class PlayerController : MonoBehaviour
             {
                 timeSinceBeam = 0;
                 //Fire beam at center
-                var frontOfPlayer = transform.position + transform.forward * 10f;
+                var frontOfPlayer = transform.position + transform.forward * 5f;
                 var beamShot = Instantiate(beamProjectile, frontOfPlayer, transform.rotation);
 
                 //Apply backwards momentum
                 rb.AddForce(gameObject.transform.forward * -10);
 
                 beamAmmoCurrent -= 1f;
+                
             }
         }
         else
@@ -112,15 +133,19 @@ public class PlayerController : MonoBehaviour
             timeSinceBeam += 1;
         }
 
+        
+
         //AMMO RECHARGE =================================================================================================
         if (laserAmmoCurrent < laserAmmoMaximum)
         {
+            /*
             laserAmmoRecharge += 1;
             if(laserAmmoRecharge >= laserAmmoRegeneration)
             {
                 laserAmmoCurrent += 1;
                 laserAmmoRecharge = 0;
             }
+            */
         }
 
         if(laserAmmoCurrent > laserAmmoMaximum)
@@ -130,12 +155,14 @@ public class PlayerController : MonoBehaviour
 
         if ((beamAmmoCurrent < beamAmmoMaximum) && timeSinceBeam >= 500)
         {
+            /*
             beamAmmoRecharge += 1;
             if (beamAmmoRecharge >= beamAmmoRegeneration)
             {
                 beamAmmoCurrent += 1;
                 beamAmmoRecharge = 0;
             }
+            */
         }
 
         if (beamAmmoCurrent > beamAmmoMaximum)

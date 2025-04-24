@@ -59,7 +59,7 @@ public class PlayerBeamProjectile : MonoBehaviour
         }
 
         // Destroy when hitting environment
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Building"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Building") || collision.gameObject.CompareTag("Broken") || collision.gameObject.CompareTag("Broken1"))
         {
             Destroy(gameObject);
         }

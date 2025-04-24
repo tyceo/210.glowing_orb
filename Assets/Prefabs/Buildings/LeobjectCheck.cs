@@ -6,24 +6,45 @@ public class LeobjectCheck : MonoBehaviour
     public Vector3 positionOffset = new Vector3(0f, 0f, 0f); // 48f, 0f, 1.5f
     public float sizeReductionFactor = 100f; // New variable to control size reduction
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag("Building"))
         {
-            // Store the original object's scale
-            Vector3 originalScale = transform.localScale;
+            if (other.CompareTag("PlayerProjectile") && Random.Range(0, 15) == 0)
+            {
+                // Store the original object's scale
+                Vector3 originalScale = transform.localScale;
 
-            // Create position with offset
-            Vector3 spawnPosition = transform.position;
+                // Create position with offset
+                Vector3 spawnPosition = transform.position;
 
-            // Spawn with zero rotation and store the reference
-            GameObject newObject = Instantiate(replacementPrefab, spawnPosition, Quaternion.identity);
+                // Spawn with zero rotation and store the reference
+                GameObject newObject = Instantiate(replacementPrefab, spawnPosition, Quaternion.identity);
 
-            // Apply the original object's scale divided by 100 to the new object
-            newObject.transform.localScale = originalScale / sizeReductionFactor;
+                // Apply the original object's scale divided by 100 to the new object
+                newObject.transform.localScale = originalScale / sizeReductionFactor;
 
-            // Destroy the original tower
-            Destroy(gameObject);
+                // Destroy the original tower
+                Destroy(gameObject);
+            }
+            if (other.CompareTag("Player") )
+            {
+                // Store the original object's scale
+                Vector3 originalScale = transform.localScale;
+
+                // Create position with offset
+                Vector3 spawnPosition = transform.position;
+
+                // Spawn with zero rotation and store the reference
+                GameObject newObject = Instantiate(replacementPrefab, spawnPosition, Quaternion.identity);
+
+                // Apply the original object's scale divided by 100 to the new object
+                newObject.transform.localScale = originalScale / sizeReductionFactor;
+
+                // Destroy the original tower
+                Destroy(gameObject);
+            }
+
         }
     }
 }
