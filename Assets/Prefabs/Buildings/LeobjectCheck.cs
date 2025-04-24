@@ -10,7 +10,7 @@ public class LeobjectCheck : MonoBehaviour
     {
         if (!other.CompareTag("Building"))
         {
-            if (other.CompareTag("PlayerProjectile") && Random.Range(0, 15) == 0)
+            if (other.CompareTag("PlayerProjectile") && Random.Range(0, 10) == 0)
             {
                 // Store the original object's scale
                 Vector3 originalScale = transform.localScale;
